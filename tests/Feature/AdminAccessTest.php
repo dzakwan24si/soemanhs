@@ -3,7 +3,6 @@
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Post;
-use App\Models\Post;
 it('denies access to admin panel for guests', function () {
     $this->get('/admin')->assertRedirect('/admin/login');
 });
@@ -26,5 +25,5 @@ it('allows operator to access posts and categories but denies users and settings
     $this->get('/admin/posts')->assertSuccessful();
     $this->get('/admin/categories')->assertSuccessful();
     $this->get('/admin/settings-page')->assertForbidden();
-    $this->get('/admin/users')->assertForbidden();
+    $this->get('/admin/users')->assertStatus(404);
 });

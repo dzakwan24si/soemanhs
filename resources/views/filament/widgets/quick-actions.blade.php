@@ -14,7 +14,7 @@
                 href="{{ \App\Filament\Resources\Announcements\AnnouncementResource::getUrl('create') }}"
                 tag="a"
                 icon="heroicon-m-megaphone"
-                color="info"
+                color="primary"
             >
                 Tambah Pengumuman
             </x-filament::button>

@@ -53,9 +53,9 @@ php artisan test
 Wajib mengubah kredensial default sebelum *deploy* ke produksi. Sesuaikan nilai berikut pada file `.env`:
 ```env
 ADMIN_EMAIL=admin@soemanhs.sch.id
-ADMIN_PASSWORD=password
+ADMIN_PASSWORD=GANTI-INI-SEBELUM-DEPLOY
 OPERATOR_EMAIL=operator@soemanhs.sch.id
-OPERATOR_PASSWORD=password
+OPERATOR_PASSWORD=GANTI-INI-SEBELUM-DEPLOY
 ```
 
 Data utama (kategori, admin, halaman placeholder) menggunakan `DatabaseSeeder`. Untuk mengisi data dummy (berita, fasilitas, prestasi untuk keperluan contoh), jalankan:

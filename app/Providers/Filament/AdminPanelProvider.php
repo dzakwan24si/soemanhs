@@ -41,6 +41,16 @@ class AdminPanelProvider extends PanelProvider
                     ->icon('heroicon-o-globe-alt')
                     ->sort(-1),
             ])
+            ->navigationGroups([
+                \Filament\Navigation\NavigationGroup::make()
+                     ->label('Konten'),
+                \Filament\Navigation\NavigationGroup::make()
+                     ->label('Media'),
+                \Filament\Navigation\NavigationGroup::make()
+                     ->label('Profil Sekolah'),
+                \Filament\Navigation\NavigationGroup::make()
+                     ->label('Pengaturan'),
+            ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
@@ -48,9 +58,9 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
+                \App\Filament\Widgets\QuickActions::class,
                 \App\Filament\Widgets\StatsOverview::class,
                 \App\Filament\Widgets\LatestContactMessages::class,
-                \App\Filament\Widgets\QuickActions::class,
             ])
             ->middleware([
                 EncryptCookies::class,

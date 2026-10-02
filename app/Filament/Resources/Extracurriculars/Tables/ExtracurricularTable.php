@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Staff\Tables;
+namespace App\Filament\Resources\Extracurriculars\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -10,10 +10,9 @@ use Filament\Actions\RestoreBulkAction;
 use Filament\Actions\DeleteAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 
-class StaffTable
+class ExtracurricularTable
 {
     public static function configure(Table $table): Table
     {
@@ -21,23 +20,19 @@ class StaffTable
             ->defaultSort('sort_order', 'asc')
             ->reorderable('sort_order')
             ->columns([
-                ImageColumn::make('photo')
-                    ->label('Foto')
-                    ->circular(),
+                ImageColumn::make('image')
+                    ->label('Foto'),
                 TextColumn::make('name')
-                    ->label('Nama Lengkap')
+                    ->label('Nama Ekstrakurikuler')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('position')
-                    ->label('Jabatan')
-                    ->searchable(),
                 TextColumn::make('sort_order')
                     ->label('Urutan')
                     ->numeric()
                     ->sortable(),
             ])
             ->filters([
-                TrashedFilter::make(),
+                //
             ])
             ->recordActions([
                 EditAction::make(),
@@ -46,8 +41,6 @@ class StaffTable
             ->bulkActions([
                 \Filament\Actions\BulkActionGroup::make([
                     DeleteBulkAction::make()->requiresConfirmation(),
-                    ForceDeleteBulkAction::make()->requiresConfirmation(),
-                    RestoreBulkAction::make(),
                 ]),
             ]);
     }

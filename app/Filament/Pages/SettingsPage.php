@@ -26,7 +26,7 @@ class SettingsPage extends Page implements HasForms
 
     public static function getNavigationGroup(): string|\UnitEnum|null
     {
-        return 'Sistem';
+        return 'Pengaturan';
     }
 
     public function getTitle(): string|\Illuminate\Contracts\Support\Htmlable

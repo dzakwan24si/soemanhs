@@ -7,7 +7,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Section;
+use Filament\Schemas\Components\Section;
 use Filament\Forms\Components\Hidden;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Str;
@@ -25,7 +25,7 @@ class PostForm
                             ->label('Judul Berita')
                             ->required()
                             ->live(onBlur: true)
-                            ->afterStateUpdated(fn (string $operation, $state, \Filament\Forms\Set $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
+                            ->afterStateUpdated(fn (string $operation, $state, \Filament\Schemas\Components\Utilities\Set $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
                         TextInput::make('slug')
                             ->label('Slug URL')
                             ->helperText('Otomatis dibuat dari judul. Hanya ubah jika diperlukan untuk SEO.')
@@ -80,3 +80,4 @@ class PostForm
             ]);
     }
 }
+

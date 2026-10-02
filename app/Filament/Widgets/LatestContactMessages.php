@@ -10,8 +10,9 @@ use App\Filament\Resources\ContactMessages\ContactMessageResource;
 
 class LatestContactMessages extends BaseWidget
 {
-    protected static ?int $sort = 2;
+    protected static ?int $sort = 3;
     protected int | string | array $columnSpan = 'full';
+    protected static ?string $heading = 'Pesan Masuk Terbaru';
 
     public function table(Table $table): Table
     {
@@ -32,7 +33,7 @@ class LatestContactMessages extends BaseWidget
                     ->sortable(),
             ])
             ->actions([
-                Tables\Actions\Action::make('view')
+                \Filament\Actions\Action::make('view')
                     ->label('Lihat')
                     ->url(fn (ContactMessage $record): string => ContactMessageResource::getUrl('index'))
                     ->icon('heroicon-m-eye'),

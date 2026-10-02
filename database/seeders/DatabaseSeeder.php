@@ -6,11 +6,6 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Setting;
 use App\Models\Page;
-use App\Models\Extracurricular;
-use App\Models\Facility;
-use App\Models\Achievement;
-use App\Models\Staff;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -22,10 +17,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // 1. Admin Awal dari .env
         $adminEmail = env('ADMIN_EMAIL', 'admin@soemanhs.sch.id');
-        $adminPassword = env('ADMIN_PASSWORD', 'password');
+        $adminPassword = env('ADMIN_PASSWORD', 'GANTI-INI-SEBELUM-DEPLOY');
+        $operatorEmail = env('OPERATOR_EMAIL', 'operator@soemanhs.sch.id');
+        $operatorPassword = env('OPERATOR_PASSWORD', 'GANTI-INI-SEBELUM-DEPLOY');
+
+        if (app()->environment('production')) {
+            if (empty($adminPassword) || strlen($adminPassword) < 12 || $adminPassword === 'GANTI-INI-SEBELUM-DEPLOY') {
+                throw new \Exception('KEAMANAN: Sandi admin tidak memenuhi syarat produksi (minimal 12 karakter dan tidak boleh nilai default).');
+            }
+            if (empty($operatorPassword) || strlen($operatorPassword) < 12 || $operatorPassword === 'GANTI-INI-SEBELUM-DEPLOY') {
+                throw new \Exception('KEAMANAN: Sandi operator tidak memenuhi syarat produksi (minimal 12 karakter dan tidak boleh nilai default).');
+            }
+        }
         
+        // 1. Admin Awal dari .env
         User::firstOrCreate(
             ['email' => $adminEmail],
             [
@@ -37,9 +43,6 @@ class DatabaseSeeder extends Seeder
         );
 
         // Operator
-        $operatorEmail = env('OPERATOR_EMAIL', 'operator@soemanhs.sch.id');
-        $operatorPassword = env('OPERATOR_PASSWORD', 'password');
-        
         User::firstOrCreate(
             ['email' => $operatorEmail],
             [
