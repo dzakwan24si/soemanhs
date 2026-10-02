@@ -1,58 +1,64 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# SMA IT Soeman HS Web
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Website resmi publik untuk SMA IT Soeman HS Pekanbaru.
 
-## About Laravel
+## Tech Stack
+- **Backend:** Laravel 13
+- **Frontend:** React 19 + Inertia.js
+- **Styling:** Tailwind CSS + UI Custom
+- **Icons:** Heroicons
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Cara Setup
+1. Pastikan Anda telah menginstal PHP, Composer, Node.js, dan MySQL (Laragon/XAMPP).
+2. Install dependensi PHP:
+   ```bash
+   composer install
+   ```
+3. Install dependensi NPM:
+   ```bash
+   npm install
+   ```
+4. Salin file `.env.example` menjadi `.env` (jika belum ada) dan konfigurasi koneksi database:
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+5. Buat database sesuai nama di `.env` dan jalankan migrasi:
+   ```bash
+   php artisan migrate
+   ```
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Cara Menjalankan
+Jalankan kedua perintah berikut di terminal terpisah:
+1. Menjalankan backend Laravel:
+   ```bash
+   php artisan serve --port=8001
+   ```
+2. Menjalankan frontend Vite:
+   ```bash
+   npm run dev
+   ```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
+## Cara Testing
+Proyek ini menggunakan Pest untuk pengujian otomatis.
+Untuk menjalankan seluruh *test suite*, jalankan:
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+php artisan test
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## Catatan Khusus
+- **Data Hari Besar Islam**: Pada komponen Kalender Akademik di beranda, data hari besar agama (misal: Maulid Nabi, Tasmi', dll) akan diinput secara manual oleh admin melalui *database*. Sistem tidak menghitung dan memprediksi tanggal hijriah secara otomatis untuk hari raya karena penentuan tanggal aktual bergantung pada keputusan otoritas.
 
-## Contributing
+## Admin & Credentials
+Wajib mengubah kredensial default sebelum *deploy* ke produksi. Sesuaikan nilai berikut pada file `.env`:
+```env
+ADMIN_EMAIL=admin@soemanhs.sch.id
+ADMIN_PASSWORD=password
+OPERATOR_EMAIL=operator@soemanhs.sch.id
+OPERATOR_PASSWORD=password
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Data utama (kategori, admin, halaman placeholder) menggunakan `DatabaseSeeder`. Untuk mengisi data dummy (berita, fasilitas, prestasi untuk keperluan contoh), jalankan:
+```bash
+php artisan db:seed --class=DemoSeeder
+```
